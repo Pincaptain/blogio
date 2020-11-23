@@ -1,0 +1,138 @@
+/* Bio CSS */
+body {
+    background-color: black;
+}
+
+.bio-header {
+    border-bottom: blue 1px solid;
+    border-left: blue 1px solid;
+    border-right: blue 1px solid;
+    border-radius: 10px;
+
+    font-family: 'Consolas', monospace;
+}
+
+.bio-breadcrumb {
+    border: blue 1px solid;
+    border-radius: 10px;
+    background-color: black;
+    font-family: 'Consolas', monospace;
+}
+
+.bio-breadcrumb li {
+    color: #0d6efd !important;
+}
+
+.bio-breadcrumb a {
+    text-decoration: none;
+}
+
+.bio-card {
+    background-color: black !important;
+    border: blue 1px solid;
+    border-radius: 10px;
+    font-family: 'Consolas', monospace !important;
+}
+
+.bio-card a {
+    text-decoration: none;
+}
+
+.bio-post {
+    border: blue 1px solid;
+    border-radius: 10px;
+    padding: 16px;
+    font-family: 'Consolas', monospace;
+}
+
+.bio-post a {
+    text-decoration: none;
+}
+
+.bio-alert {
+    background-color: black;
+    border: blue 1px solid;
+    border-radius: 10px;
+    color: red;
+    font-family: 'Consolas', monospace;
+}
+
+.bio-alert hr {
+    color: red;
+}
+
+.bio-btn-danger {
+    border: red 1px solid;
+    background-color: black;
+}
+
+.bio-btn-danger:hover {
+    background-color: black;
+}
+
+.bio-btn-primary {
+    border: blue 1px solid;
+    background-color: black;
+    color: #0d6efd;
+}
+
+.bio-btn-primary:hover {
+    background-color: black;
+    border: blue 1px solid;
+}
+
+.bio-btn-primary:active {
+    background-color: black;
+    border: blue 1px solid;
+}
+
+.bio-btn-primary:focus {
+    background-color: black;
+    border: blue 1px solid;
+}
+
+.bio-operations {
+    border: blue 1px solid;
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.bio-operations a {
+    text-decoration: none;
+    font-family: 'Consolas', monospace;
+    margin-left: 4px;
+}
+
+.bio-form-control {
+    background-color: black;
+    color: white;
+    border: blue 1px solid;
+    border-radius: 10px;
+}
+
+.bio-form-control:focus {
+    background-color: black;
+    color: white;
+    border: blue 1px solid;
+    border-radius: 10px;
+}
+
+.pagination > li > a {
+    border-color: blue !important;
+    background-color: black !important;
+    color: white !important;
+}
+
+.pagination > li > a:hover {
+    border-color: blue !important;
+    background-color: black !important;
+    color: white !important;
+}
+
+.bio-pagination-control {
+    border-radius: 0 !important;
+}
+
+.bio-sorting-control {
+    cursor: pointer;
+}

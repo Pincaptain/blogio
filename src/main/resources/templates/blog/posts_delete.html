@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="~{blog/extends/layout.html}" lang="en">
+<!-- Page Content -->
+<section layout:fragment="page-fragment">
+    <!-- Delete Post Alert -->
+    <div class="alert alert-danger bio-alert" role="alert">
+        <h4 class="alert-heading">Are you sure you want to delete <span th:text="${post.title}">Zinat</span>!</h4>
+        <p>By performing this irreversible action you are completely removing this post from your blog.</p>
+        <hr>
+        <!-- Delete Form -->
+        <form method="post" th:action="@{/posts/delete/{id}(id=${id})}">
+            <button type="submit" class="btn btn-outline-danger bio-btn-danger">Delete</button>
+            <button type="button" class="btn btn-outline-secondary bio-btn-primary"
+                    onclick="window.location.href='/posts'">Back
+            </button>
+        </form>
+    </div>
+</section>
+</html>

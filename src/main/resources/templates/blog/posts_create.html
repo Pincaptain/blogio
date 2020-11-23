@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="~{blog/extends/layout.html}" lang="en">
+<!-- Page Content -->
+<section layout:fragment="page-content">
+    <h3 class="mb-3 text-light">Create Post</h3>
+    <!-- Form -->
+    <div class="post-form">
+        <form th:action="@{/posts/create}" th:object="${postDto}" method="post">
+            <!-- Title Field -->
+            <div class="form-group mb-2">
+                <label th:for="*{title}" class="text-light">Title</label>
+                <input th:field="*{title}" th:if="${!#fields.hasErrors('title')}" class="form-control bio-form-control">
+                <input th:field="*{title}" th:if="${#fields.hasErrors('title')}"
+                       class="form-control is-invalid bio-form-control">
+                <small th:text="${#fields.hasErrors('title')}" th:errors="*{title}" class="invalid-feedback"></small>
+            </div>
+            <!-- Content Field -->
+            <div class="form-group mb-3">
+                <label th:for="*{content}" class="text-light">Content</label>
+                <textarea th:field="*{content}" th:if="${!#fields.hasErrors('content')}"
+                          class="form-control bio-form-control"
+                          rows="5"></textarea>
+                <textarea th:field="*{content}" th:if="${#fields.hasErrors('content')}"
+                          class="form-control is-invalid bio-form-control"
+                          rows="5"></textarea>
+                <small th:text="${#fields.hasErrors('content')}" th:errors="*{content}"
+                       class="invalid-feedback"></small>
+            </div>
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary bio-btn-primary">Create</button>
+        </form>
+    </div>
+</section>
+</html>

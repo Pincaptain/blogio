@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog.io</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+          integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/bio.css}">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"
+            integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD"
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/3a29e5ddf4.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<!-- Header -->
+<header class="container bio-header">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link active" href="/posts">Projectile Projection</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/posts">Posts</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+        </li>
+    </ul>
+</header>
+<!-- Page Content -->
+<main layout:fragment="page-content" class="container mt-5"></main>
+</body>
+</html>

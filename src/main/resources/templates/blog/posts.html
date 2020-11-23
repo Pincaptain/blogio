@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="~{blog/extends/layout.html}" lang="en">
+<!-- Page Content -->
+<section layout:fragment="page-content">
+    <!-- Breadcrumb -->
+    <section th:replace="blog/includes/breadcrumbs.html :: empty-breadcrumb"></section>
+    <!-- Post Sorting Operations -->
+    <section th:if="${posts.hasContent()}" class="mt-2">
+        <nav>
+            <ol class="breadcrumb bio-breadcrumb">
+                <li class="breadcrumb-item text-light">
+                    <a th:if="${sortBy != 'createdAt' || sortBy == 'createdAt' && isDesc == false}"
+                       class="bio-sorting-control" onclick="insertSortingParams('createdAt', 'true')">Created At <i
+                            class="fas fa-sort-down"></i></a>
+                    <a th:if="${sortBy == 'createdAt' && isDesc == true}"
+                       class="bio-sorting-control" onclick="insertSortingParams('createdAt', 'false')">Created At <i
+                            class="fas fa-sort-up"></i></a>
+                </li>
+                <li class="breadcrumb-item text-light">
+                    <a th:if="${sortBy != 'updatedAt' || sortBy == 'updatedAt' && isDesc == false}"
+                       class="bio-sorting-control" onclick="insertSortingParams('updatedAt', 'true')">Updated At <i
+                            class="fas fa-sort-down"></i></a>
+                    <a th:if="${sortBy == 'updatedAt' && isDesc == true}"
+                       class="bio-sorting-control" onclick="insertSortingParams('updatedAt', 'false')">Updated At <i
+                            class="fas fa-sort-up"></i></a>
+                </li>
+                <li class="breadcrumb-item text-light">
+                    <a th:if="${sortBy != 'title' || sortBy == 'title' && isDesc == false}"
+                       class="bio-sorting-control" onclick="insertSortingParams('title', 'true')">Title <i
+                            class="fas fa-sort-down"></i></a>
+                    <a th:if="${sortBy == 'title' && isDesc == true}"
+                       class="bio-sorting-control" onclick="insertSortingParams('title', 'false')">Title <i
+                            class="fas fa-sort-up"></i></a>
+                </li>
+                <li class="breadcrumb-item text-light">
+                    <a th:if="${sortBy != 'content' || sortBy == 'content' && isDesc == false}"
+                       class="bio-sorting-control" onclick="insertSortingParams('content', 'true')">Content <i
+                            class="fas fa-sort-down"></i></a>
+                    <a th:if="${sortBy == 'content' && isDesc == true}"
+                       class="bio-sorting-control" onclick="insertSortingParams('content', 'false')">Content <i
+                            class="fas fa-sort-up"></i></a>
+                </li>
+            </ol>
+        </nav>
+    </section>
+    <!-- Posts Filter Operations -->
+    <section th:if="${posts.hasContent()}" class="mt-2">
+        <div class="justify-content-center">
+            <div class="form-group">
+                <input type="text" class="form-control bio-form-control" id="search" placeholder="Search">
+            </div>
+        </div>
+    </section>
+    <!-- Posts List -->
+    <section th:if="${posts.hasContent()}" class="row align-items-center mt-4">
+        <div th:each="post: ${posts}" class="col-sm-12 col-md-6 col-lg-3 mb-2">
+            <div class="card bio-card">
+                <div class="card-body">
+                    <h5 th:text="${post.title}" class="card-title text-light"></h5>
+                    <h6 class="card-subtitle mb-2 text-secondary">
+                        <a href="https://github.com/Pincaptain" class="card-link">Borjan Gjorovski</a>
+                    </h6>
+                    <h6 class="card-subtitle mb-2 text-secondary"
+                        th:text="${#dates.format(post.createdAt, 'dd-MMM-yyyy hh:mm')}"></h6>
+                    <p th:text="${#strings.abbreviate(post.content, 150)}" class="card-text text-light"></p>
+                    <a th:href="@{/posts/{id}(id=${post.id})}" class="card-link">More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Posts Pagination -->
+    <section th:if="${posts.hasContent()}" class="mt-2">
+        <nav>
+            <ul class="pagination justify-content-center">
+                <!-- Previous -->
+                <li th:class="${posts.hasPrevious()} ? 'page-item' : 'page-item disabled'">
+                    <a class="page-link" th:href="@{/posts(page=${currentPage - 1})}">Previous</a>
+                </li>
+                <!-- First Page -->
+                <th:block aria-describedby="First page" th:if="${currentPage == 1}">
+                    <li class="page-item"><a class="page-link active">1</a></li>
+                    <li class="page-item">
+                        <a class="page-link" th:if="${posts.totalPages >= 2}" href="/posts?page=2">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:if="${posts.totalPages >= 3}" href="/posts?page=3">3</a>
+                    </li>
+                </th:block>
+                <!-- Any Page -->
+                <th:block aria-describedby="Any Page" th:if="${currentPage != 1 && currentPage != posts.totalPages}">
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{/posts(page=${currentPage - 1})}"
+                           th:text="${currentPage - 1}"></a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link active" th:text="${currentPage}"></a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:if="${posts.totalPages >= currentPage + 1}"
+                           th:href="@{/posts(page=${currentPage + 1})}"
+                           th:text="${currentPage + 1}"></a>
+                    </li>
+                </th:block>
+                <!-- Last Page -->
+                <th:block aria-describedby="Last Page" th:if="${currentPage != 1 && currentPage == posts.totalPages}">
+                    <li class="page-item">
+                        <a class="page-link" th:if="${currentPage - 2 != 0}"
+                           th:href="@{/posts(page=${currentPage - 2})}"
+                           th:text="${currentPage - 2}"></a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{/posts(page=${currentPage - 1})}"
+                           th:text="${currentPage - 1}"></a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link active" th:text="${currentPage}"></a>
+                    </li>
+                </th:block>
+                <!-- Custom Input Page -->
+                <li class="page-item">
+                    <form method="get" action="/posts">
+                        <label>
+                            <input class="form-control bio-form-control bio-pagination-control" type="text" name="page">
+                        </label>
+                    </form>
+                </li>
+                <!-- Next -->
+                <li class="page-item" th:class="${posts.hasNext()} ? 'page-item' : 'page-item disabled'">
+                    <a class="page-link" th:href="@{/posts(page=${currentPage + 1})}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+    <!-- Posts Operations -->
+    <section class="bio-operations mt-2">
+        <a href="/posts/create">Create Post</a>
+    </section>
+    <!-- Sorting/Filtering Scripts -->
+    <script>
+        let searchField = document.getElementById('search');
+
+        searchField.addEventListener('keyup', function (e) {
+            console.log(e.key);
+            if (e.key === 'Enter') {
+                console.log(e.key);
+                e.preventDefault();
+                insertFilteringParams(searchField.value);
+            }
+        });
+
+        function insertFilteringParams(titleFilter) {
+            let url = new URL(document.location.href);
+
+            url.searchParams.set('filter', titleFilter);
+
+            document.location = url.href;
+        }
+
+        function insertSortingParams(sortBy, isDesc) {
+            let url = new URL(document.location.href);
+
+            url.searchParams.set('sort', sortBy);
+            url.searchParams.set('desc', isDesc);
+
+            document.location = url.href;
+        }
+    </script>
+</section>
+</html>

@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<!-- Empty Breadcrumb -->
+<nav aria-label="breadcrumb" th:fragment="empty-breadcrumb">
+    <ol class="breadcrumb bio-breadcrumb">
+        <li class="breadcrumb-item active text-light" aria-current="page">Posts</li>
+    </ol>
+</nav>
+<!-- Post Breadcrumb -->
+<nav aria-label="breadcrumb" th:fragment="breadcrumb(title)">
+    <ol class="breadcrumb bio-breadcrumb">
+        <li class="breadcrumb-item text-light">
+            <a href="/posts">Posts</a>
+        </li>
+        <li th:text="${title}" class="breadcrumb-item active text-light" aria-current="page"></li>
+    </ol>
+</nav>
+</html>
