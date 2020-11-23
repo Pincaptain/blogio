@@ -45,8 +45,16 @@
         </nav>
     </section>
     <!-- Posts Filter Operations -->
-    <section th:if="${posts.hasContent()}" class="mt-2">
-        <div class="justify-content-center">
+    <section class="mt-2">
+        <div th:if="${!posts.hasContent()}" class="mb-3">
+            <button type="button" onclick="refreshParams()"
+                    class="btn btn-outline-primary bio-btn-primary bio-text"
+                    style="border-radius: 10px;"><i
+                    class="fa fa-refresh text-light"></i>
+                Refresh
+            </button>
+        </div>
+        <div th:if="${posts.hasContent()}" class="justify-content-center">
             <div class="form-group">
                 <input type="text" class="form-control bio-form-control" id="search" placeholder="Search">
             </div>
@@ -70,7 +78,7 @@
         </div>
     </section>
     <!-- Posts Pagination -->
-    <section th:if="${posts.hasContent()}" class="mt-2">
+    <section th:if="${posts.hasContent()}" class="mt-2 bio-text">
         <nav>
             <ul class="pagination justify-content-center">
                 <!-- Previous -->
@@ -153,6 +161,16 @@
             let url = new URL(document.location.href);
 
             url.searchParams.set('filter', titleFilter);
+
+            document.location = url.href;
+        }
+
+        function refreshParams() {
+            let url = new URL(document.location.href);
+
+            url.searchParams.delete('filter');
+            url.searchParams.delete('sort');
+            url.searchParams.delete('desc');
 
             document.location = url.href;
         }

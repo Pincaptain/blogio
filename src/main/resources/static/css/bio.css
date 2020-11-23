@@ -91,6 +91,10 @@ body {
     border: blue 1px solid;
 }
 
+.bio-text {
+    font-family: 'Consolas', monospace;
+}
+
 .bio-operations {
     border: blue 1px solid;
     border-radius: 10px;
